@@ -54,13 +54,11 @@ if (orientation === "小説") {
 // 小説
 async function initNovelViewer(group, episodeId) {
   // 漫画UIを非表示
-  const manga = document.getElementById("mangaUI");
-  if (manga) manga.style.display = "none";
-
+  document.getElementById("mangaUI")?.style.display = "none";
   document.getElementById("nav").style.display = "none";
   document.getElementById("pageCounter").style.display = "none";
 
-  // 小説UIを表示
+  // 小説UI表示
   const viewer = document.getElementById("novelViewer");
   viewer.style.display = "block";
 
@@ -71,7 +69,7 @@ async function initNovelViewer(group, episodeId) {
 
   try {
     const res = await fetch(
-      `/api/novel?group=${encodeURIComponent(group)}&episode=${encodeURIComponent(episodeId)}`
+      `/api/novel?group=${encodeURIComponent(group)}&episodeId=${encodeURIComponent(episodeId)}`
     );
 
     if (!res.ok) {
@@ -273,6 +271,7 @@ loadEpisodeList();
 document.getElementById("homeBtn").addEventListener("click", () => {
   window.location.href = "index.html";
 });
+
 
 
 
