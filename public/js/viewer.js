@@ -69,23 +69,22 @@ async function initNovelViewer(group, episodeId) {
 
   title.textContent = `第${episodeId}話`;
 
-  let res;
-    try {
-      res = await fetch(
-        `/api/novel?group=${encodeURIComponent(group)}&episode=${encodeURIComponent(episodeId)}`
-      );
-    } catch (e) {
-      content.textContent = "本文を読み込めませんでした";
-      return;
-    }
+  try {
+    const res = await fetch(
+      `/api/novel?group=${encodeURIComponent(group)}&episode=${encodeURIComponent(episodeId)}`
+    );
 
     if (!res.ok) {
-      content.textContent = "本文を読み込めませんでした";
-      return;
+      throw new Error("fetch failed");
     }
 
     const json = await res.json();
     content.textContent = json.text || "（本文がありません）";
+
+  } catch (e) {
+    console.error(e);
+    content.textContent = "本文を読み込めませんでした";
+  }
 }
 
 // 漫画
@@ -274,5 +273,6 @@ loadEpisodeList();
 document.getElementById("homeBtn").addEventListener("click", () => {
   window.location.href = "index.html";
 });
+
 
 
