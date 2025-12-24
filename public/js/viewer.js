@@ -71,7 +71,7 @@ async function initNovelViewer(group, episodeId) {
 
   try {
     const res = await fetch(
-      `/api/novel?group=${encodeURIComponent(group)}&episode=${encodeURIComponent(episodeId)}`
+      `/api/novel?group=${encodeURIComponent(group)}&episodeId=${encodeURIComponent(episodeId)}`
     );
 
     if (!res.ok) {
@@ -273,3 +273,4 @@ loadEpisodeList();
 document.getElementById("homeBtn").addEventListener("click", () => {
   window.location.href = "index.html";
 });
+
